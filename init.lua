@@ -1026,7 +1026,8 @@ require('lazy').setup({
         additional_vim_regex_highlighting = { 'ruby' },
       }
       opts.indent = { enable = true, disable = { 'ruby' } }
-      opts.autotag = { enable = true }
+      -- opts.autotag = { enable = true }
+      require('nvim-ts-autotag').setup()
       vim.treesitter.language.register('tsx', 'typescriptreact')
       return opts
     end,
