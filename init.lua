@@ -99,7 +99,7 @@ vim.g.have_nerd_font = false
 --  For more options, you can see `:help option-list`
 
 -- Make line numbers default
--- vim.o.number = true
+vim.o.number = true
 -- You can also add relative line numbers, to help with jumping.
 --  Experiment for yourself to see if you like it!
 vim.o.relativenumber = true
@@ -114,6 +114,9 @@ vim.o.showmode = false
 vim.opt.tabstop = 2 -- Number of spaces a <Tab> counts for
 vim.opt.shiftwidth = 2 -- Number of spaces for auto-indent
 vim.opt.expandtab = true -- Use spaces instead of tabs
+
+-- Change cursor color
+-- Different colors for different modes
 
 -- Sync clipboard between OS and Neovim.
 --  Schedule the setting after `UiEnter` because it can increase startup-time.
@@ -239,6 +242,31 @@ if not (vim.uv or vim.loop).fs_stat(lazypath) then
     error('Error cloning lazy.nvim:\n' .. out)
   end
 end
+
+-- session management
+vim.api.nvim_create_autocmd({ 'VimEnter' }, {
+  group = vim.api.nvim_create_augroup('persistence_auto_restore', { clear = true }),
+  callback = function()
+    -- Only restore session if:
+    -- 1. No files were opened as command line arguments
+    -- 2. We're in a git repository (project directory)
+    if vim.fn.argc() == 0 and vim.fn.isdirectory '.git' == 1 then
+      require('persistence').load()
+    end
+  end,
+  nested = true,
+})
+
+-- Auto-save session when leaving vim
+vim.api.nvim_create_autocmd({ 'VimLeavePre' }, {
+  group = vim.api.nvim_create_augroup('persistence_auto_save', { clear = true }),
+  callback = function()
+    -- Only auto-save if we're in a git repository
+    if vim.fn.isdirectory '.git' == 1 then
+      require('persistence').save()
+    end
+  end,
+})
 
 ---@type vim.Option
 local rtp = vim.opt.rtp
@@ -961,23 +989,13 @@ require('lazy').setup({
       --  Check out: https://github.com/echasnovski/mini.nvim
     end,
   },
-  {
-    'nvim-lualine/lualine.nvim',
-    event = 'VeryLazy',
-    opts = {},
-  },
-  {
-    'smjonas/inc-rename.nvim',
-    cmd = 'IncRename',
-    config = true,
-  },
   { -- Highlight, edit, and navigate code
     'nvim-treesitter/nvim-treesitter',
     build = ':TSUpdate',
     main = 'nvim-treesitter.configs', -- Sets main module to use for opts
     -- [[ Configure Treesitter ]] See `:help nvim-treesitter`
-    opts = {
-      ensure_installed = {
+    opts = function(_, opts)
+      opts.ensure_installed = {
         'bash',
         'c',
         'diff',
@@ -996,18 +1014,21 @@ require('lazy').setup({
         'python',
         'gitignore',
         'sql',
-      },
+      }
       -- Autoinstall languages that are not installed
-      auto_install = true,
-      highlight = {
+      opts.auto_install = true
+      opts.highlight = {
         enable = true,
         -- Some languages depend on vim's regex highlighting system (such as Ruby) for indent rules.
         --  If you are experiencing weird indenting issues, add the language to
         --  the list of additional_vim_regex_highlighting and disabled languages for indent.
         additional_vim_regex_highlighting = { 'ruby' },
-      },
-      indent = { enable = true, disable = { 'ruby' } },
-    },
+      }
+      opts.indent = { enable = true, disable = { 'ruby' } }
+      opts.autotag = { enable = true }
+      vim.treesitter.language.register('tsx', 'typescriptreact')
+      return opts
+    end,
     -- There are additional nvim-treesitter modules that you can use to interact
     -- with nvim-treesitter. You should go explore a few and see what interests you:
     --
@@ -1026,7 +1047,7 @@ require('lazy').setup({
   --  Uncomment any of the lines below to enable them (you will need to restart nvim).
   --
   -- require 'kickstart.plugins.debug',
-  -- require 'kickstart.plugins.indent_line',
+  require 'kickstart.plugins.indent_line',
   require 'kickstart.plugins.lint',
   require 'kickstart.plugins.autopairs',
   require 'kickstart.plugins.neo-tree',
