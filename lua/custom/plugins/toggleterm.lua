@@ -66,9 +66,6 @@ return {
         vim.cmd 'stopinsert'
         toggle_vertical()
       end, { desc = 'Toggle vertical terminal' })
-
-      -- Exit terminal mode with Esc
-      vim.keymap.set('t', '<Esc>', [[<C-\><C-n>]], { desc = 'Exit terminal mode' })
     end,
   },
 }
