@@ -544,8 +544,11 @@ require('lazy').setup({
 
       -- Allows extra capabilities provided by blink.cmp
       'saghen/blink.cmp',
+      'SmiteshP/nvim-navic',
+      'SmiteshP/nvim-navbuddy',
     },
     config = function()
+      -- Find this function in your init.lua and ADD these lines at the end:
       -- Brief aside: **What is LSP?**
       --
       -- LSP is an initialism you've probably heard, but might not understand what it is.
@@ -675,6 +678,10 @@ require('lazy').setup({
             map('<leader>th', function()
               vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hint.is_enabled { bufnr = event.buf })
             end, '[T]oggle Inlay [H]ints')
+          end
+          if client and client.server_capabilities.documentSymbolProvider then
+            require('nvim-navic').attach(client, event.buf)
+            require('nvim-navbuddy').attach(client, event.buf)
           end
         end,
       })
