@@ -323,7 +323,10 @@ require('lazy').setup({
       },
     },
   },
-
+  {
+    'prisma/vim-prisma',
+    ft = 'prisma',
+  },
   -- NOTE: Plugins can also be configured to run Lua code when they are loaded.
   --
   -- This is often very useful to both group configuration, as well as handle
@@ -743,6 +746,7 @@ require('lazy').setup({
         --
         -- But for many setups, the LSP (`ts_ls`) will work just fine
         ts_ls = {},
+        prismals = {},
         --
         lua_ls = {
           -- cmd = { ... },
