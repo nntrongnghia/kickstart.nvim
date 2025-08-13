@@ -1088,3 +1088,10 @@ require('lazy').setup({
 
 -- The line beneath this is called `modeline`. See `:help modeline`
 -- vim: ts=2 sts=2 sw=2 et
+-- Disable markdown linting
+vim.api.nvim_create_autocmd('FileType', {
+  pattern = { 'markdown', 'md' },
+  callback = function(args)
+    vim.diagnostic.enable(false, { bufnr = args.buf })
+  end,
+})
