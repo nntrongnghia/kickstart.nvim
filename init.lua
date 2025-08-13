@@ -90,7 +90,8 @@ P.S. You can delete this when you're done too. It's your config now! :)
 vim.g.mapleader = ' '
 vim.g.maplocalleader = ' '
 -- When in terminal mode, use <C-Esc> to exit terminal mode
-vim.keymap.set('t', '<C-q>', '<C-\\><C-n>:q<CR>', { desc = 'Exit terminal mode' })
+vim.keymap.set('t', '<C-q>', '<C-\\><C-n>:q<CR>', { desc = 'Close terminal' })
+vim.keymap.set('t', '<A-q>', '<C-\\><C-n>', { desc = 'Escape terminal mode' })
 -- Set to true if you have a Nerd Font installed and selected in the terminal
 vim.g.have_nerd_font = true
 
