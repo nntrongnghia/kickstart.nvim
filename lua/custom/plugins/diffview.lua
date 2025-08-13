@@ -22,6 +22,7 @@ return {
 
     keys = {
       -- Main DiffView commands
+      { '<leader>dv', 'nil', desc = 'DiffView Menu' },
       { '<leader>dvo', '<cmd>DiffviewOpen<cr>', desc = 'DiffView: Open' },
       { '<leader>dvc', '<cmd>DiffviewClose<cr>', desc = 'DiffView: Close' },
       { '<leader>dvt', '<cmd>DiffviewToggleFiles<cr>', desc = 'DiffView: Toggle Files Panel' },

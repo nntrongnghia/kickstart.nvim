@@ -82,6 +82,7 @@ return {
       map('n', '<leader>X', '<cmd>BufferLineCloseOthers<cr>', { desc = 'Close other buffers' })
 
       -- Buffer picking
+      map('n', '<leader>b', 'nil', { desc = 'Bufferline' })
       map('n', '<leader>bp', '<cmd>BufferLinePick<cr>', { desc = 'Pick buffer' })
       map('n', '<leader>bc', '<cmd>BufferLinePickClose<cr>', { desc = 'Pick buffer to close' })
 

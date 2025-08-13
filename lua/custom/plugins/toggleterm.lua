@@ -41,7 +41,12 @@ return {
 
       -- ===== Terminal 1: Floating terminal (NVChad style) =====
       local toggle_float = create_terminal_toggle(1, 'float', nil, 'floating')
-      vim.keymap.set('n', '<A-i>', toggle_float, { desc = 'Toggle floating terminal' })
+      vim.keymap.set('n', '<A-i>', function()
+        toggle_float()
+        vim.schedule(function()
+          vim.cmd 'startinsert'
+        end)
+      end, { desc = 'Toggle floating terminal' })
       vim.keymap.set('t', '<A-i>', function()
         vim.cmd 'stopinsert'
         toggle_float()
@@ -51,7 +56,12 @@ return {
       local toggle_horizontal = create_terminal_toggle(2, 'horizontal', function()
         return 15
       end, 'horizontal')
-      vim.keymap.set('n', '<A-h>', toggle_horizontal, { desc = 'Toggle horizontal terminal' })
+      vim.keymap.set('n', '<A-h>', function()
+        toggle_horizontal()
+        vim.schedule(function()
+          vim.cmd 'startinsert'
+        end)
+      end, { desc = 'Toggle horizontal terminal' })
       vim.keymap.set('t', '<A-h>', function()
         vim.cmd 'stopinsert'
         toggle_horizontal()
@@ -61,7 +71,12 @@ return {
       local toggle_vertical = create_terminal_toggle(3, 'vertical', function()
         return 40
       end, 'vertical')
-      vim.keymap.set('n', '<A-v>', toggle_vertical, { desc = 'Toggle vertical terminal' })
+      vim.keymap.set('n', '<A-v>', function()
+        toggle_vertical()
+        vim.schedule(function()
+          vim.cmd 'startinsert'
+        end)
+      end, { desc = 'Toggle vertical terminal' })
       vim.keymap.set('t', '<A-v>', function()
         vim.cmd 'stopinsert'
         toggle_vertical()

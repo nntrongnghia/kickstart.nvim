@@ -4,9 +4,9 @@ return {
   -- Required dependency
   {
     'folke/snacks.nvim',
-    priority = 1000,
-    lazy = false,
-    opts = {},
+    -- priority = 1000,
+    -- lazy = false,
+    -- opts = {},
   },
 
   -- Simple claudecode setup

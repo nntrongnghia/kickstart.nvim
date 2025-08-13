@@ -5,6 +5,9 @@ return {
     -- See `:help ibl`
     main = 'ibl',
     opts = {
+      indent = {
+        char = '▏',
+      },
       scope = { enabled = false }, -- do not highlight
     },
   },

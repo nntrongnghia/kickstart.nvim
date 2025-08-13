@@ -90,7 +90,7 @@ P.S. You can delete this when you're done too. It's your config now! :)
 vim.g.mapleader = ' '
 vim.g.maplocalleader = ' '
 -- When in terminal mode, use <C-Esc> to exit terminal mode
-vim.keymap.set('t', '<C-q>', '<C-\\><C-n>', { desc = 'Exit terminal mode' })
+vim.keymap.set('t', '<C-q>', '<C-\\><C-n>:q<CR>', { desc = 'Exit terminal mode' })
 -- Set to true if you have a Nerd Font installed and selected in the terminal
 vim.g.have_nerd_font = true
 
@@ -189,9 +189,9 @@ vim.keymap.set('n', '<leader>q', vim.diagnostic.setloclist, { desc = 'Open diagn
 -- for people to discover. Otherwise, you normally need to press <C-\><C-n>, which
 -- is not what someone will guess without a bit more experience.
 --
--- NOTE: This won't work in all terminal emulators/tmux/etc. Try your own mapping
--- or just use <C-\><C-n> to exit terminal mode
-vim.keymap.set('t', '<Esc><Esc>', '<C-\\><C-n>', { desc = 'Exit terminal mode' })
+-- -- NOTE: This won't work in all terminal emulators/tmux/etc. Try your own mapping
+-- -- or just use <C-\><C-n> to exit terminal mode
+-- vim.keymap.set('t', '<Esc><Esc>', '<C-\\><C-n>', { desc = 'Exit terminal mode' })
 
 -- TIP: Disable arrow keys in normal mode
 -- vim.keymap.set('n', '<left>', '<cmd>echo "Use h to move!!"<CR>')
@@ -245,18 +245,19 @@ if not (vim.uv or vim.loop).fs_stat(lazypath) then
 end
 
 -- session management
-vim.api.nvim_create_autocmd({ 'VimEnter' }, {
-  group = vim.api.nvim_create_augroup('persistence_auto_restore', { clear = true }),
-  callback = function()
-    -- Only restore session if:
-    -- 1. No files were opened as command line arguments
-    -- 2. We're in a git repository (project directory)
-    if vim.fn.argc() == 0 and vim.fn.isdirectory '.git' == 1 then
-      require('persistence').load()
-    end
-  end,
-  nested = true,
-})
+-- Auto reload session
+-- vim.api.nvim_create_autocmd({ 'VimEnter' }, {
+--   group = vim.api.nvim_create_augroup('persistence_auto_restore', { clear = true }),
+--   callback = function()
+--     -- Only restore session if:
+--     -- 1. No files were opened as command line arguments
+--     -- 2. We're in a git repository (project directory)
+--     if vim.fn.argc() == 0 and vim.fn.isdirectory '.git' == 1 then
+--       require('persistence').load()
+--     end
+--   end,
+--   nested = true,
+-- })
 
 -- Auto-save session when leaving vim
 vim.api.nvim_create_autocmd({ 'VimLeavePre' }, {
@@ -268,7 +269,6 @@ vim.api.nvim_create_autocmd({ 'VimLeavePre' }, {
     end
   end,
 })
-
 ---@type vim.Option
 local rtp = vim.opt.rtp
 rtp:prepend(lazypath)
@@ -949,7 +949,6 @@ require('lazy').setup({
       vim.cmd.colorscheme 'tokyonight-night'
     end,
   },
-
   -- Highlight todo, notes, etc in comments
   { 'folke/todo-comments.nvim', event = 'VimEnter', dependencies = { 'nvim-lua/plenary.nvim' }, opts = { signs = false } },
 
