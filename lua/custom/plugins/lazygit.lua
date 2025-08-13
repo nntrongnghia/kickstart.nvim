@@ -39,12 +39,12 @@ return {
       'LazyGitFilterCurrentFile',
     },
 
-    -- keys = {
-    --   { '<leader>g', 'nil', desc = 'LazyGit' },
-    --   { '<leader>gg', '<cmd>LazyGit<cr>', desc = 'Open LazyGit' },
-    --   { '<leader>gf', '<cmd>LazyGitCurrentFile<cr>', desc = 'LazyGit Current File' },
-    --   { '<leader>gF', '<cmd>LazyGitFilterCurrentFile<cr>', desc = 'LazyGit Filter Current File' },
-    -- },
+    keys = {
+      { '<leader>l', 'nil', desc = 'LazyGit' },
+      { '<leader>lg', '<cmd>LazyGit<cr>', desc = 'Open LazyGit' },
+      { '<leader>lf', '<cmd>LazyGitCurrentFile<cr>', desc = 'LazyGit Current File' },
+      { '<leader>lF', '<cmd>LazyGitFilterCurrentFile<cr>', desc = 'LazyGit Filter Current File' },
+    },
 
     config = function()
       -- LazyGit configuration
