@@ -18,6 +18,13 @@ return {
       },
       sections = {
         { section = 'header' },
+        {
+          section = 'terminal',
+          cmd = "curl http://api.quotable.io/random -s | jq -r '.content, .author'",
+          random = 10,
+          indent = 2,
+          height = 5,
+        },
         { section = 'keys', gap = 1, padding = 1 },
         { icon = ' ', title = 'Projects', section = 'projects', indent = 2, padding = 2 },
         { section = 'startup' },
