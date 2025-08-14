@@ -35,6 +35,11 @@ return {
       end, { desc = 'CopilotChat - Ask a question with selection (inline)' })
       vim.g.copilot_no_tab_map = true
       vim.keymap.set('i', '<S-Tab>', 'copilot#Accept("\\<S-Tab>")', { expr = true, replace_keycodes = false })
+      vim.keymap.set('i', '<M-l>', 'copilot#AcceptLine("\\<M-l>")', {
+        expr = true,
+        replace_keycodes = false,
+        desc = 'Copilot - Accept line',
+      })
     end,
   },
 }
