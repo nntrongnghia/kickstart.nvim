@@ -84,6 +84,21 @@ I hope you enjoy your Neovim journey,
 P.S. You can delete this when you're done too. It's your config now! :)
 --]]
 
+-- Performance optimizations
+vim.opt.lazyredraw = false -- Don't skip redraws
+vim.opt.ttyfast = true -- Fast terminal connection
+vim.opt.updatetime = 100 -- Faster CursorHold events
+vim.opt.timeoutlen = 500 -- Faster key sequence timeout
+vim.opt.ttimeoutlen = 10 -- Very fast key code timeout
+
+-- Redraw settings
+vim.opt.redrawtime = 1500 -- Max time for syntax highlighting
+vim.opt.synmaxcol = 240 -- Limit syntax highlighting on long lines
+
+-- Terminal settings
+vim.opt.termguicolors = true
+vim.opt.guicursor = 'n-v-c:block,i-ci-ve:ver25,r-cr:hor20,o:hor50'
+
 -- Set <space> as the leader key
 -- See `:help mapleader`
 --  NOTE: Must happen before plugins are loaded (otherwise wrong leader will be used)
@@ -141,11 +156,11 @@ vim.o.smartcase = true
 -- Keep signcolumn on by default
 vim.o.signcolumn = 'yes'
 
--- Decrease update time
-vim.o.updatetime = 250
+-- -- Decrease update time
+-- vim.o.updatetime = 250
 
--- Decrease mapped sequence wait time
-vim.o.timeoutlen = 300
+-- -- Decrease mapped sequence wait time
+-- vim.o.timeoutlen = 300
 
 -- Configure how new splits should be opened
 vim.o.splitright = true
@@ -753,6 +768,7 @@ require('lazy').setup({
         -- But for many setups, the LSP (`ts_ls`) will work just fine
         ts_ls = {},
         prismals = {},
+        cssls = {},
         --
         lua_ls = {
           -- cmd = { ... },
@@ -843,6 +859,8 @@ require('lazy').setup({
         --
         -- You can use 'stop_after_first' to run the first available formatter from the list
         javascript = { 'prettier' },
+        css = { 'prettier' },
+        json = { 'prettier' },
         typescript = { 'prettier' },
         javascriptreact = { 'prettier' },
         typescriptreact = { 'prettier' },
@@ -1126,3 +1144,5 @@ vim.api.nvim_create_autocmd('FileType', {
     vim.diagnostic.enable(false, { bufnr = args.buf })
   end,
 })
+
+vim.o.guifont = 'JetBrainsMono Nerd Font Mono:h10'
