@@ -19,9 +19,9 @@ return {
       vim.keymap.set('n', '<leader>cc', '<cmd>CopilotChat<cr>', { desc = 'CopilotChat - Open chat' })
       vim.keymap.set('v', '<leader>cc', ':CopilotChat<cr>', { desc = 'CopilotChat - Open chat with selection' })
 
-      vim.keymap.set('n', '<leader>ce', '<cmd>CopilotChatExplain<cr>', { desc = 'CopilotChat - Explain code' })
-      vim.keymap.set('n', '<leader>ct', '<cmd>CopilotChatTests<cr>', { desc = 'CopilotChat - Generate tests' })
-      vim.keymap.set('n', '<leader>cf', '<cmd>CopilotChatFixDiagnostic<cr>', { desc = 'CopilotChat - Fix diagnostic' })
+      vim.keymap.set('v', '<leader>ce', '<cmd>CopilotChatExplain<cr>', { desc = 'CopilotChat - Explain code' })
+      vim.keymap.set('v', '<leader>cf', '<cmd>CopilotChatFix<cr>', { desc = 'CopilotChat - Fix diagnostic' })
+      vim.keymap.set('n', '<leader>cg', '<cmd>CopilotChatCommit<cr>', { desc = 'CopilotChat - Commit' })
 
       -- Inline chat
       vim.keymap.set('n', '<leader>ci', function()
