@@ -1115,3 +1115,9 @@ vim.api.nvim_create_autocmd('FileType', {
 })
 
 vim.o.guifont = 'JetBrainsMono Nerd Font Mono:h10'
+-- Create a user command to open the theme picker
+vim.api.nvim_create_user_command('ThemePicker', function()
+  require('custom.themer').picker()
+end, { desc = 'Open the theme picker' })
+-- Load the saved theme
+require('custom.themer').load_theme()
