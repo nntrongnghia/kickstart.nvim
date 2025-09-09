@@ -471,11 +471,6 @@ require('lazy').setup({
         -- You can put your default mappings / updates / etc. in here
         --  All the info you're looking for is in `:help telescope.setup()`
         --
-        -- defaults = {
-        --   mappings = {
-        --     i = { ['<c-enter>'] = 'to_fuzzy_refine' },
-        --   },
-        -- },
         pickers = {
           find_files = { hidden = true },
         },
@@ -559,6 +554,7 @@ require('lazy').setup({
           'tailwindcss-language-server',
           'typescript-language-server',
           'css-lsp',
+          'pyright',
         },
       },
       'mason-org/mason-lspconfig.nvim',
@@ -781,6 +777,23 @@ require('lazy').setup({
               },
               -- You can toggle below to ignore Lua_LS's noisy `missing-fields` warnings
               -- diagnostics = { disable = { 'missing-fields' } },
+            },
+          },
+        },
+        pyright = {
+          settings = {
+            python = {
+              pythonPath = function()
+                local conda_prefix = os.getenv 'CONDA_PREFIX'
+                if conda_prefix then
+                  return conda_prefix .. '/bin/python'
+                end
+                local venv_path = os.getenv 'VIRTUAL_ENV'
+                if venv_path then
+                  return venv_path .. '/bin/python'
+                end
+                return 'python' -- fallback
+              end,
             },
           },
         },
